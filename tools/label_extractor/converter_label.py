@@ -12,11 +12,10 @@ target_label['type'] = 'Dontcare'
 target_label['truncated'] = 0.0
 target_label['occluded'] = 0  # used in image
 target_label['alpha'] = 0
-target_label['bbox'] = [0, 0, 50, 50]  # used in image
+target_label['bbox'] = [0, 0, 50, 50]  # put 0,0,50,50 as dummy pixel coordinate
 target_label['dimensions'] = []
 target_label['location'] = []
 target_label['rotation_y'] = 0
-# target_label['score'] = 'Dontcare'
 
 transform_location = np.mat([
     [0, -1, 0],
@@ -80,7 +79,7 @@ if __name__ == '__main__':
                 list(label['geometry']['dimensions'].values()))
             # print('dimensions', tmp_target_label['dimensions'])
             position = list(label['geometry']['position'].values())
-            position[2] = position[2]-0.7-1  # z
+            position[2] = position[2]-1.7  # z (calibration from the center height)
             position[0] = position[0]-0.2+20  # x (-0.2 is interal calib and +10 is for shifted)
             tmp_target_label['location'] = get_transformed_values(position, transform_location)
             # print('location', tmp_target_label['location'])
